@@ -8,8 +8,19 @@
           [(ngModel)]="model.title"
           name="title"
           required
+          #title="ngModel"
+          minlength="2"
+          (input)="printModel(title)"
         />
         <label for="title">Title</label>
+        <ng-container *ngIf="title.invalid && title.touched">
+            <div class="card-panel red darken-1" *ngIf="title.errors.required">
+                Field is required
+            </div>
+            <div class="card-panel red darken-1" *ngIf="title.errors.minlength">
+                Text is to short
+            </div>
+        </ng-container>
       </div>
     </div>
     <div class="row">
